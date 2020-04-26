@@ -1,0 +1,23 @@
+p{
+    font-size: 14px;
+    line-height: 75%;
+}
+.wrapper {
+    border: 1px solid lightgray;
+    width: 75%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 14px;
+}
+h4{
+    margin-top: 70px;
+}
+
+.add {
+    margin-top: 70px;
+}
+
+.product-amount-input {
+    max-width: 60px;
+}

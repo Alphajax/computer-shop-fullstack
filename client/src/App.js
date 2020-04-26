@@ -1,32 +1,48 @@
-import React from 'react'
-import {BrowserRouter as Router} from 'react-router-dom'
-import {useRoutes} from './routes'
-import {useAuth} from './hooks/auth.hook'
-import {AuthContext} from './context/AuthContext'
-import {Navbar} from './components/Navbar'
-import {Loader} from './components/Loader'
-import 'materialize-css'
+import React, {useEffect, useState} from 'react'
 
-function App() {
-  const {token, login, logout, userId, ready} = useAuth()
-  const isAuthenticated = !!token
-  const routes = useRoutes(isAuthenticated)
+import Header from "./components/header/header";
+import Catalog from "./components/catalog/catalog";
+import Cart from "./components/cart/cart";
 
-  if (!ready) {
-    return <Loader />
+const App = () => {
+
+  const [isAuthorised, setIsAuthorised] = useState(false);
+  const [showCatalog, setShowCatalog] = useState(true);
+  const [showCart, setShowCart] = useState(false);
+  const [catalog, setCatalog] = useState(<Catalog/>);
+
+  const toggleShowCart = () =>{
+    if(showCart){
+        setShowCart(false);
+    } else {
+        setShowCart(true);
+    }
   }
 
+  useEffect(()=>{
+      localStorage.clear();
+  },[])
+
+  useEffect(()=>{
+      if(!showCatalog){
+          setCatalog(null);
+      } else {
+          setCatalog(<Catalog/>);
+      }
+  },[showCatalog])
+
+  const cart = showCart ? <Cart/> : null
   return (
-    <AuthContext.Provider value={{
-      token, login, logout, userId, isAuthenticated
-    }}>
-      <Router>
-        { isAuthenticated && <Navbar /> }
-        <div className="container">
-          {routes}
-        </div>
-      </Router>
-    </AuthContext.Provider>
+      <React.Fragment>
+        <Header
+            isAuthorised={isAuthorised}
+            setIsAuthorised ={setIsAuthorised}
+            setShowCatalog = {setShowCatalog}
+            toggleShowCart = {toggleShowCart}/>
+          {catalog}
+          {cart}
+      </React.Fragment>
+
   )
 }
 

@@ -1,0 +1,21 @@
+.news {
+    margin-top: 30px;
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.news img {
+    max-width: 87%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.small {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
