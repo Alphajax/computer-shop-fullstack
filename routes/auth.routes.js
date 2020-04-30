@@ -83,7 +83,6 @@ router.post(
       config.get('jwtSecret'),
       { expiresIn: '1h' }
     )
-    console.log('log in successfully');
     res.status(200).json({ token, userId: user.id, role: user.role })
 
   } catch (e) {

@@ -40,6 +40,7 @@ const App = () => {
   return (
       <React.Fragment>
         <Header
+            showCatalog = {showCatalog}
             afterLogout = {setToStartPage}
             isAuthorised={isAuthorised}
             setIsAuthorised ={setIsAuthorised}

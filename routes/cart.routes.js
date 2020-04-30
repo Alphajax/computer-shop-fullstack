@@ -64,10 +64,7 @@ router.get('/get/:id', async (req,res) => {
 router.post('/delete/:id', async (req, res) =>{
     const id = req.params.id;
     try {
-        const itemToDelete = await Item.findOne({productId: id});
-        if(itemToDelete) {
-            itemToDelete.remove();
-        }
+        await Item.deleteOne({productId: id});
         res.status(200).json({message: 'Successfully deleted'})
     } catch (e) {
         res.status(500).json({message: 'Error during deleting'})

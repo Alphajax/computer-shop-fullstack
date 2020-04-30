@@ -3,7 +3,7 @@ import './header.css';
 import LoginForm from "../login-form/login-form";
 import RegistrationForm from "../registration-form/registration-form";
 
-const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, toggleShowCart, afterLogout}) => {
+const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, showCatalog, toggleShowCart, afterLogout}) => {
 
     const [ showLoginForm, setShowLoginForm ] = useState(false);
     const [ showRegistrationForm, setShowRegistrationForm ] = useState(false);
@@ -26,10 +26,19 @@ const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, toggleShowCart, 
     };
 
     const onMyCartClick = () => {
-        toggleShowCart();
-        setShowCatalog((s) => {
-            return !s
-        })
+        if(isAuthorised){
+          toggleShowCart();
+          setShowCatalog((s) => {
+              return !s
+          })
+        }
+    }
+
+    const onCatalogueClick = () => {
+      toggleShowCart();
+      setShowCatalog((s) => {
+        return !s
+      })
     }
 
     useEffect(() =>{
@@ -63,15 +72,24 @@ const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, toggleShowCart, 
                 </button>
                 <button
                     className="btn purple lighten-2"
-                    onClick={onRegistrationClick}>
+                    onClick={onRegistrationClick}
+                    disabled={isAuthorised}
+                    >
                     Registration
                 </button>
                 <button
                     className="btn  light-green lighten-2"
                     onClick={onMyCartClick}
-                    disabled={!isAuthorised}
+                    disabled={!isAuthorised || !showCatalog}
                     >
                     Cart
+                </button>
+                <button
+                    className="btn deep-purple lighten-1"
+                    onClick={onCatalogueClick}
+                    disabled = {showCatalog}
+                  >
+                  Catalog
                 </button>
             </div>
             {loginForm}
