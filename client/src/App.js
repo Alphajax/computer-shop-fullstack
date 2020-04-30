@@ -19,6 +19,11 @@ const App = () => {
     }
   }
 
+  const setToStartPage = () => {
+      setShowCatalog(true);
+      setShowCart(false);
+  }
+
   useEffect(()=>{
       localStorage.clear();
   },[])
@@ -35,6 +40,7 @@ const App = () => {
   return (
       <React.Fragment>
         <Header
+            afterLogout = {setToStartPage}
             isAuthorised={isAuthorised}
             setIsAuthorised ={setIsAuthorised}
             setShowCatalog = {setShowCatalog}

@@ -28,7 +28,7 @@ const Cart = () => {
             setFullPrice(fullPrice);
             setItems(fullArr);
         }).catch(()=> setItems(null))
-    },[])
+    },[fullPrice])
 
     useEffect(() => {
         if(items) {
@@ -37,7 +37,7 @@ const Cart = () => {
                 const productType = getProductType(e);
                 const productInfo = e[productType];
                 return <li>
-                    <ProductInCart productInfo = {productInfo} amount = {e.amount} productType = {productType}/>
+                    <ProductInCart productInfo = {productInfo} amount = {e.amount} afterDeleteAction={setFullPrice} productType = {productType}/>
                 </li>
             })
             setContent(

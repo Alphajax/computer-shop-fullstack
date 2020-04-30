@@ -3,7 +3,7 @@ import './header.css';
 import LoginForm from "../login-form/login-form";
 import RegistrationForm from "../registration-form/registration-form";
 
-const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, toggleShowCart}) => {
+const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, toggleShowCart, afterLogout}) => {
 
     const [ showLoginForm, setShowLoginForm ] = useState(false);
     const [ showRegistrationForm, setShowRegistrationForm ] = useState(false);
@@ -22,6 +22,7 @@ const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, toggleShowCart})
     const onLogoutClick = () => {
         setIsAuthorised(false);
         localStorage.clear();
+        afterLogout();
     };
 
     const onMyCartClick = () => {

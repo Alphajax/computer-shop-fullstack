@@ -36,7 +36,7 @@ const LoginForm = ({ afterLoginAction}) => {
             localStorage.setItem('isAuthorised', "true");
             afterLoginAction();
         } catch (e) {
-            console.log(e);
+            alert(e);
         }
 
     }

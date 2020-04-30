@@ -1,14 +1,34 @@
 import React from "react";
 import getProductFields from "../../creators/getProductFields";
 import "./product-in-cart.css"
+import {useHttp} from "../../hooks/http.hook";
 
-const ProductInCart = ({productInfo, amount, productType}) => {
+const ProductInCart = ({productInfo, amount, afterDeleteAction , productType}) => {
     const productFields = getProductFields(productType);
+    const {loading, request, error, clearError} = useHttp()
     const url = productInfo.url;
     const paragraphs = [];
+
+    const onDeleteItemClick = async (e) => {
+        const itemId = productInfo._id;
+        const token = localStorage.getItem('token');
+        try {
+            await request(`/api/cart/delete/${itemId}`, 'POST',null, {
+                'authorisation' : token
+            });
+            if(error) {
+                alert(error);
+                clearError();
+            }
+            afterDeleteAction(0);
+        } catch (e) {}
+    }
+
     for (let f of productFields) {
         paragraphs.push(<p>{f} : {productInfo[f]}</p>)
     }
+
+
     return (
         <div className="wrapper">
             <div className="row">
@@ -24,7 +44,11 @@ const ProductInCart = ({productInfo, amount, productType}) => {
                     <h5>Amount: {amount} pts</h5>
                 </div>
                 <div className="col-2">
-                    <button className="waves-effect waves-light btn red lighten-1">DELETE</button>
+                    <button
+                        className="waves-effect waves-light btn red lighten-1"
+                        onClick={onDeleteItemClick}>
+                        DELETE
+                    </button>
                 </div>
             </div>
         </div>
