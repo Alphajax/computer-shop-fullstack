@@ -15,7 +15,7 @@
     "mern",
     "react"
   ],
-  "author": "Vladilen Minin <vladilen.m@yandex.ru>",
+  "author": "Dzmitry Chervanenka <dima1772000@gmail.com>",
   "license": "ISC",
   "proxy": "http://localhost:5000",
   "dependencies": {

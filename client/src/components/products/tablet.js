@@ -30,9 +30,17 @@ const Tablet = ({_id, url, name, price, ram, memory, screen, screenType, screenR
             setAmount(1);
         }
     }
-    const button = !localStorage.getItem('isAuthorised') ? null : (<div className="col-2">
+    const button = !localStorage.getItem('isAuthorised') ? null : (
+    <>
+        <input
+            className="product-amount-input"
+            type="number"
+            value={amount}
+            min={"1"}
+            onChange={onAmountChangeHandler}
+            name={"amount"} />
         <button className="btn btn-info add" onClick={onAddToCartClick}>Add To Cart</button>
-    </div>);
+    </>);
 
     return (
         <div className="wrapper">
@@ -52,13 +60,6 @@ const Tablet = ({_id, url, name, price, ram, memory, screen, screenType, screenR
                     <h4>Price: {price} BYN</h4>
                 </div>
                 <div className="col-2">
-                    <input
-                        className="product-amount-input"
-                        type="number"
-                        value={amount}
-                        min={"1"}
-                        onChange={onAmountChangeHandler}
-                        name={"amount"} />
                     {button}
                 </div>
 

@@ -6,7 +6,7 @@ import ProductList from "../product-list/product-list";
 import News from "../news/news";
 import createProductService from "../../creators/product-service-creator";
 
-const Catalog = () => {
+const Catalog = ({isAuthorised}) => {
   const [productType, setProductType ] = useState ('empty');
   const [loading, setLoading ] = useState(true);
   const [products, setProducts] = useState(undefined);
@@ -19,8 +19,6 @@ const Catalog = () => {
 
   }, [productType] );
 
-  useEffect(() => {
-  },[]);
 
   const fetchProducts = () => {
       if (prodService){
@@ -41,7 +39,7 @@ const Catalog = () => {
   } else if (loading && productType === 'empty') {
       content = <News/>;
   } else {
-      content = <ul><ProductList products= {products} Product = {prod} /></ul>
+      content = <ul><ProductList products= {products} Product = {prod} isAuthorised={isAuthorised}/></ul>
   }
   return (
       <React.Fragment>

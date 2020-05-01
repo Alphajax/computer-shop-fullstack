@@ -43,8 +43,9 @@ const Cart = () => {
             setContent(
                 <React.Fragment>
 
-                    <div className="container full-price">
+                    <div className="container row">
                         <h3>Full Price : {fullPrice}</h3>
+                        <button className="btn next-btn">Далее</button>
                     </div>
                     <ul>{contentArrModified}</ul>
                 </React.Fragment>

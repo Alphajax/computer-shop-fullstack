@@ -9,9 +9,11 @@ const App = () => {
   const [isAuthorised, setIsAuthorised] = useState(false);
   const [showCatalog, setShowCatalog] = useState(true);
   const [showCart, setShowCart] = useState(false);
+  const [showSubmitPurchase, setShowSubmitPurchase] = useState(false);
+  const [submitPurchasePage, setSubmitPurchasePage] = useState(null);
   const [catalog, setCatalog] = useState(<Catalog/>);
 
-  const toggleShowCart = () =>{
+  const toggleShowCart = () => {
     if(showCart){
         setShowCart(false);
     } else {
@@ -19,9 +21,18 @@ const App = () => {
     }
   }
 
+  const toggleShowSubmitPurchase = () => {
+    if(showSubmitPurchase){
+        setShowSubmitPurchase(false);
+    } else {
+        setShowSubmitPurchase(true);
+    }
+  }
+
   const setToStartPage = () => {
       setShowCatalog(true);
       setShowCart(false);
+      setShowSubmitPurchase(false);
   }
 
   useEffect(()=>{
@@ -32,9 +43,13 @@ const App = () => {
       if(!showCatalog){
           setCatalog(null);
       } else {
-          setCatalog(<Catalog/>);
+          setCatalog(<Catalog isAuthorised={isAuthorised}/>);
       }
   },[showCatalog])
+
+  useEffect(() => {
+
+  }, [showSubmitPurchase])
 
   const cart = showCart ? <Cart/> : null
   return (
