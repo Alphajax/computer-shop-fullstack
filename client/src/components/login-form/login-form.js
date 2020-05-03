@@ -3,7 +3,7 @@ import "./login-form.css"
 import {useHttp} from "../../hooks/http.hook";
 import {useMessage} from "../../hooks/message.hook";
 
-const LoginForm = ({ afterLoginAction}) => {
+const LoginForm = ({ afterLoginAction, setIsAdmin}) => {
     const {loading, request, error, clearError} = useHttp()
     const [form, setForm] = useState({
         email: '', password: ''
@@ -35,6 +35,11 @@ const LoginForm = ({ afterLoginAction}) => {
             localStorage.setItem('token', data.token);
             localStorage.setItem('isAuthorised', "true");
             localStorage.setItem('role', data.role)
+            if(data.role==="admin") {
+                setIsAdmin(true);
+            } else {
+                setIsAdmin(false);
+            }
             afterLoginAction();
         } catch (e) {
             alert(e)
