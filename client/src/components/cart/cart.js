@@ -30,6 +30,15 @@ const Cart = () => {
         }).catch(()=> setItems(null))
     },[fullPrice])
 
+    const onSubmitOrderClick = () => {
+        try {
+            const token = localStorage.getItem('token');
+            const body = request(`api/cart/submit`,'POST', null, {
+                authorization: token
+            });
+        } catch (e) {}
+    }
+
     useEffect(() => {
         if(items) {
             const contentArr = [...items];
@@ -45,7 +54,7 @@ const Cart = () => {
 
                     <div className="container row">
                         <h3>Full Price : {fullPrice}</h3>
-                        <button className="btn next-btn">Далее</button>
+                        <button className="btn next-btn" onClick={onSubmitOrderClick}>Подтвердить заказ</button>
                     </div>
                     <ul>{contentArrModified}</ul>
                 </React.Fragment>

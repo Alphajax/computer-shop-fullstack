@@ -23,7 +23,7 @@ router.post('/add/:id/:type/:amount',async (req, res) => {
             const existingItem = await Item.findOne({cartId, productId});
 
             let existingAmount = existingItem.amount + amount;
-            await Item.remove({_id: existingItem._id})
+            await Item.deleteOne({_id: existingItem._id})
 
             const updatedItem = new Item({
                 cartId,
@@ -73,9 +73,18 @@ router.post('/delete/:id', async (req, res) =>{
 
 });
 
-
-
-
+router.post('/submit', async (req, res) => {
+    try {
+        const userToken = req.headers.authorization;
+        const decoded = jwt.verify(userToken,config.get('jwtSecret')).userId;
+        await Cart.updateOne({userId: decoded, isActive: true}, { $set: {
+                isActive: false
+            }});
+        res.status(200).json({message:'Order Submitted!'})
+    } catch (e) {
+        res.status(500).json({message: e.message});
+    }
+})
 
 const createFullCart = (...args) => {
     let fullPrice = 0;

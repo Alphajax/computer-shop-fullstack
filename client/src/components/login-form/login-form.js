@@ -34,6 +34,7 @@ const LoginForm = ({ afterLoginAction}) => {
             localStorage.setItem('userId', data.userId);
             localStorage.setItem('token', data.token);
             localStorage.setItem('isAuthorised', "true");
+            localStorage.setItem('role', data.role)
             afterLoginAction();
         } catch (e) {
             alert(e)
