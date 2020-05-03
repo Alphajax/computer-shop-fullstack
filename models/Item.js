@@ -9,6 +9,9 @@ const schema = new Schema({
         type:String,
         required: true
     },
+    name: {
+        type: String
+    },
     productId : {
         type: String,
         required: true,

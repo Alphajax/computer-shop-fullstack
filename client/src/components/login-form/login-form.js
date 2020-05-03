@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./login-form.css"
 import {useHttp} from "../../hooks/http.hook";
-import {useMessage} from "../../hooks/message.hook";
 
 const LoginForm = ({ afterLoginAction, setIsAdmin}) => {
     const {loading, request, error, clearError} = useHttp()
@@ -54,7 +53,7 @@ const LoginForm = ({ afterLoginAction, setIsAdmin}) => {
                         <div className="input-field">
                             <input
                                 className="form-control"
-                                placeholder="Input email"
+                                placeholder="Введите почту"
                                 id="email"
                                 type="text"
                                 name="email"
@@ -64,7 +63,7 @@ const LoginForm = ({ afterLoginAction, setIsAdmin}) => {
                         </div>
                         <div className="input-field">
                             <input
-                                placeholder="Input password"
+                                placeholder="Введите пароль"
                                 id="password"
                                 type="password"
                                 name="password"
@@ -78,7 +77,7 @@ const LoginForm = ({ afterLoginAction, setIsAdmin}) => {
                                 disabled={loading}
                                 onClick={loginHandler}
                             >
-                                Login
+                                Вход
                             </button>
                         </div>
                     </div>

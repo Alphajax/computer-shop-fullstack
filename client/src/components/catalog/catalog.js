@@ -6,7 +6,7 @@ import ProductList from "../product-list/product-list";
 import News from "../news/news";
 import createProductService from "../../creators/product-service-creator";
 
-const Catalog = ({isAuthorised}) => {
+const Catalog = () => {
   const [productType, setProductType ] = useState ('empty');
   const [loading, setLoading ] = useState(true);
   const [products, setProducts] = useState(undefined);
@@ -39,7 +39,7 @@ const Catalog = ({isAuthorised}) => {
   } else if (loading && productType === 'empty') {
       content = <News/>;
   } else {
-      content = <ul><ProductList products= {products} Product = {prod} isAuthorised={isAuthorised}/></ul>
+      content = <ul><ProductList products= {products} Product = {prod}/></ul>
   }
   return (
       <React.Fragment>

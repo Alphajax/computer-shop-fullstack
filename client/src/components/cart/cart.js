@@ -54,7 +54,7 @@ const Cart = () => {
 
                     <div className="container row">
                         <h3>Full Price : {fullPrice}</h3>
-                        <button className="btn next-btn" onClick={onSubmitOrderClick}>Подтвердить заказ</button>
+                        <button className="btn next-btn" onClick={onSubmitOrderClick} disabled={fullPrice===0}>Подтвердить заказ</button>
                     </div>
                     <ul>{contentArrModified}</ul>
                 </React.Fragment>

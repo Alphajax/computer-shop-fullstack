@@ -30,7 +30,8 @@ const Monoblock = ({_id, url, name, price, cpu, ram, screen, screenResolution}) 
             setAmount(1);
         }
     }
-    const button = !localStorage.getItem('isAuthorised') ? null : (
+    const showAddToCartButton = Boolean((localStorage.getItem('role') === 'user') && localStorage.getItem('isAuthorised'));
+    const button = !showAddToCartButton ? null : (
     <>
         <input
             className="product-amount-input"
@@ -49,13 +50,13 @@ const Monoblock = ({_id, url, name, price, cpu, ram, screen, screenResolution}) 
                 </div>
                 <div className="col-4">
                     <h6>{name}</h6>
-                    <p>CPU: {cpu} </p>
-                    <p>RAM: {ram*1024} МБ</p>
-                    <p>Screen Size {screen}"</p>
-                    <p>Screen Resolution {screenResolution}</p>
+                    <p>Процессор: {cpu} </p>
+                    <p>Оперативная память: {ram*1024} МБ</p>
+                    <p>Размер экрана: {screen}"</p>
+                    <p>Разрешение экрана: {screenResolution}</p>
                 </div>
                 <div className="col-3">
-                    <h4>Price: {price} BYN</h4>
+                    <h4>Цена: {price} BYN</h4>
                 </div>
                 <div className="col-2">
                     {button}

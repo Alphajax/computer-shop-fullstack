@@ -3,7 +3,7 @@ import './header.css';
 import LoginForm from "../login-form/login-form";
 import RegistrationForm from "../registration-form/registration-form";
 
-const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, showCatalog, toggleShowCart, afterLogout}) => {
+const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, showCatalog, toggleShowCart, afterLogout, toggleShowOrders}) => {
 
     const [ showLoginForm, setShowLoginForm ] = useState(false);
     const [ showRegistrationForm, setShowRegistrationForm ] = useState(false);
@@ -43,6 +43,7 @@ const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, showCatalog, tog
       })
     }
 
+
     useEffect(() =>{
         if (showRegistrationForm){
             setShowLoginForm(false)
@@ -61,7 +62,8 @@ const Header = ({isAuthorised, setIsAuthorised, setShowCatalog, showCatalog, tog
     let buttons = null;
 
     if(isAuthorised && isAdmin) {
-        buttons = (<button className="btn deep-purple lighten-1">
+        buttons = (<button className="btn deep-purple lighten-1"
+                            onClick={toggleShowOrders}>
             Заказы
         </button>);
     } else if (isAuthorised && !isAdmin){

@@ -3,14 +3,14 @@ import React, {useEffect, useState} from 'react'
 import Header from "./components/header/header";
 import Catalog from "./components/catalog/catalog";
 import Cart from "./components/cart/cart";
+import Orders from "./components/orders/orders";
 
 const App = () => {
 
   const [isAuthorised, setIsAuthorised] = useState(false);
   const [showCatalog, setShowCatalog] = useState(true);
   const [showCart, setShowCart] = useState(false);
-  const [showSubmitPurchase, setShowSubmitPurchase] = useState(false);
-  const [submitPurchasePage, setSubmitPurchasePage] = useState(null);
+  const [showOrders, setShowOrders] = useState(false);
   const [catalog, setCatalog] = useState(<Catalog/>);
 
   const toggleShowCart = () => {
@@ -21,18 +21,20 @@ const App = () => {
     }
   }
 
-  const toggleShowSubmitPurchase = () => {
-    if(showSubmitPurchase){
-        setShowSubmitPurchase(false);
+  const toggleShowOrders = () => {
+    if(showOrders){
+        setShowOrders(false);
+        setToStartPage();
     } else {
-        setShowSubmitPurchase(true);
+        setShowCatalog(false);
+        setShowOrders(true);
     }
   }
 
   const setToStartPage = () => {
       setShowCatalog(true);
       setShowCart(false);
-      setShowSubmitPurchase(false);
+      setShowOrders(false);
   }
 
   useEffect(()=>{
@@ -47,11 +49,8 @@ const App = () => {
       }
   },[showCatalog])
 
-  useEffect(() => {
-
-  }, [showSubmitPurchase])
-
   const cart = showCart ? <Cart/> : null
+  const orders = showOrders ? <Orders/> : null
   return (
       <React.Fragment>
         <Header
@@ -60,7 +59,9 @@ const App = () => {
             isAuthorised={isAuthorised}
             setIsAuthorised ={setIsAuthorised}
             setShowCatalog = {setShowCatalog}
-            toggleShowCart = {toggleShowCart}/>
+            toggleShowCart = {toggleShowCart}
+            toggleShowOrders = {toggleShowOrders}/>
+          {orders}
           {catalog}
           {cart}
       </React.Fragment>
